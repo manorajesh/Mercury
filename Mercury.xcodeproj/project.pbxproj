@@ -14,6 +14,7 @@
 		3F5DE7DF2A3938B2006ABE56 /* MercuryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7DE2A3938B2006ABE56 /* MercuryTests.swift */; };
 		3F5DE7E92A3938B2006ABE56 /* MercuryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7E82A3938B2006ABE56 /* MercuryUITests.swift */; };
 		3F5DE7EB2A3938B2006ABE56 /* MercuryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7EA2A3938B2006ABE56 /* MercuryUITestsLaunchTests.swift */; };
+		3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7F92A393EE9006ABE56 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		3F5DE7E42A3938B2006ABE56 /* MercuryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MercuryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F5DE7E82A3938B2006ABE56 /* MercuryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercuryUITests.swift; sourceTree = "<group>"; };
 		3F5DE7EA2A3938B2006ABE56 /* MercuryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercuryUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3F5DE7F92A393EE9006ABE56 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				3F5DE7CC2A3938AE006ABE56 /* MercuryApp.swift */,
-				3F5DE7CE2A3938AE006ABE56 /* ContentView.swift */,
+				3F5DE7F82A393EDB006ABE56 /* Views */,
 				3F5DE7D02A3938B1006ABE56 /* Assets.xcassets */,
 				3F5DE7D52A3938B1006ABE56 /* Mercury.entitlements */,
 				3F5DE7D22A3938B1006ABE56 /* Preview Content */,
@@ -127,6 +129,15 @@
 				3F5DE7EA2A3938B2006ABE56 /* MercuryUITestsLaunchTests.swift */,
 			);
 			path = MercuryUITests;
+			sourceTree = "<group>";
+		};
+		3F5DE7F82A393EDB006ABE56 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F5DE7CE2A3938AE006ABE56 /* ContentView.swift */,
+				3F5DE7F92A393EE9006ABE56 /* MapView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F5DE7CF2A3938AE006ABE56 /* ContentView.swift in Sources */,
+				3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */,
 				3F5DE7CD2A3938AE006ABE56 /* MercuryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +427,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Mercury/Mercury.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -424,7 +437,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -432,8 +447,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mano.Mercury;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -442,6 +461,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Mercury/Mercury.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -451,7 +471,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -459,8 +481,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mano.Mercury;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
