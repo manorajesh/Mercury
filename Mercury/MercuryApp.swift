@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BackgroundTasks
 
 @main
 struct MercuryApp: App {
@@ -16,5 +17,17 @@ struct MercuryApp: App {
             ContentView()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
+        .backgroundTask(.appRefresh("ThirtyMinutesLater")) {
+            
+        }
     }
+}
+
+func scheduleAppRefresh() {
+    let now = Date()
+    let later = Calendar.current.date(byAdding: .minute, value: 30, to: now)
+    
+    let request = BGAppRefreshTaskRequest(identifier: "ThirtyMinutesLater")
+    request.earliestBeginDate = later
+    try? BGTaskScheduler.shared.submit(request)
 }

@@ -20,12 +20,14 @@ struct CoordList: View {
                     let location = Coordinates(context: moc)
                     location.id = UUID()
                     location.timestamp = Date()
-                    location.latitude = (locationDataManager.locationManager.location?.coordinate.latitude.magnitude)!
-                    location.longitude = (locationDataManager.locationManager.location?.coordinate.longitude.magnitude)!
+                    location.latitude = (locationDataManager.locationManager.location?.coordinate.latitude)!
+                    location.longitude = (locationDataManager.locationManager.location?.coordinate.longitude)!
+                    print("\(location.latitude), \(location.longitude)")
                     try? moc.save()
                 } label: {
                     Label("Add Current Location", systemImage: "plus")
                 }
+                .padding()
                 Spacer()
             }
 

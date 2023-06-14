@@ -30,6 +30,11 @@ struct ContentView: View {
                         Text("Waiting for Location Access")
                         ProgressView()
                     }
+                case .authorizedWhenInUse:
+                    VStack {
+                        Text("More")
+                        ProgressView()
+                    }
                 default:
                     VStack {
                         Text("Location Access not Available")
