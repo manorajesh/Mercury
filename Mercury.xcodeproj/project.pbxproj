@@ -15,6 +15,7 @@
 		3F5DE7E92A3938B2006ABE56 /* MercuryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7E82A3938B2006ABE56 /* MercuryUITests.swift */; };
 		3F5DE7EB2A3938B2006ABE56 /* MercuryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7EA2A3938B2006ABE56 /* MercuryUITestsLaunchTests.swift */; };
 		3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7F92A393EE9006ABE56 /* MapView.swift */; };
+		3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		3F5DE7E82A3938B2006ABE56 /* MercuryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercuryUITests.swift; sourceTree = "<group>"; };
 		3F5DE7EA2A3938B2006ABE56 /* MercuryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercuryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3F5DE7F92A393EE9006ABE56 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				3F5DE7CC2A3938AE006ABE56 /* MercuryApp.swift */,
+				3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */,
 				3F5DE7F82A393EDB006ABE56 /* Views */,
 				3F5DE7D02A3938B1006ABE56 /* Assets.xcassets */,
 				3F5DE7D52A3938B1006ABE56 /* Mercury.entitlements */,
@@ -272,6 +275,7 @@
 			files = (
 				3F5DE7CF2A3938AE006ABE56 /* ContentView.swift in Sources */,
 				3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */,
+				3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */,
 				3F5DE7CD2A3938AE006ABE56 /* MercuryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +443,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app will automatically store location data on-device";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app will not automatically store any location data, but you can add it yourself";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -473,6 +479,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app will automatically store location data on-device";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app will not automatically store any location data, but you can add it yourself";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
