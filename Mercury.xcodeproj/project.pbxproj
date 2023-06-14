@@ -18,6 +18,9 @@
 		3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */; };
 		3F5DE7FF2A3A4152006ABE56 /* Mercury.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7FD2A3A4152006ABE56 /* Mercury.xcdatamodeld */; };
 		3F5DE8012A3A41A9006ABE56 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE8002A3A41A9006ABE56 /* DataController.swift */; };
+		3F5DE8042A3A4C53006ABE56 /* CircleMapPreivew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE8032A3A4C53006ABE56 /* CircleMapPreivew.swift */; };
+		3F5DE8082A3A4DC1006ABE56 /* PreviewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE8072A3A4DC1006ABE56 /* PreviewRow.swift */; };
+		3F5DE80C2A3A5598006ABE56 /* CoordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE80B2A3A5598006ABE56 /* CoordList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		3F5DE7FE2A3A4152006ABE56 /* Mercury.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mercury.xcdatamodel; sourceTree = "<group>"; };
 		3F5DE8002A3A41A9006ABE56 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		3F5DE8032A3A4C53006ABE56 /* CircleMapPreivew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMapPreivew.swift; sourceTree = "<group>"; };
+		3F5DE8072A3A4DC1006ABE56 /* PreviewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewRow.swift; sourceTree = "<group>"; };
+		3F5DE80B2A3A5598006ABE56 /* CoordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,8 +148,8 @@
 		3F5DE7F82A393EDB006ABE56 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3F5DE7CE2A3938AE006ABE56 /* ContentView.swift */,
-				3F5DE7F92A393EE9006ABE56 /* MapView.swift */,
+				3F5DE8092A3A4E8F006ABE56 /* CoordList */,
+				3F5DE80A2A3A4E9C006ABE56 /* Home */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -155,6 +161,25 @@
 				3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3F5DE8092A3A4E8F006ABE56 /* CoordList */ = {
+			isa = PBXGroup;
+			children = (
+				3F5DE8032A3A4C53006ABE56 /* CircleMapPreivew.swift */,
+				3F5DE8072A3A4DC1006ABE56 /* PreviewRow.swift */,
+				3F5DE80B2A3A5598006ABE56 /* CoordList.swift */,
+			);
+			path = CoordList;
+			sourceTree = "<group>";
+		};
+		3F5DE80A2A3A4E9C006ABE56 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3F5DE7CE2A3938AE006ABE56 /* ContentView.swift */,
+				3F5DE7F92A393EE9006ABE56 /* MapView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,7 +315,10 @@
 				3F5DE7CF2A3938AE006ABE56 /* ContentView.swift in Sources */,
 				3F5DE8012A3A41A9006ABE56 /* DataController.swift in Sources */,
 				3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */,
+				3F5DE8042A3A4C53006ABE56 /* CircleMapPreivew.swift in Sources */,
+				3F5DE80C2A3A5598006ABE56 /* CoordList.swift in Sources */,
 				3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */,
+				3F5DE8082A3A4DC1006ABE56 /* PreviewRow.swift in Sources */,
 				3F5DE7FF2A3A4152006ABE56 /* Mercury.xcdatamodeld in Sources */,
 				3F5DE7CD2A3938AE006ABE56 /* MercuryApp.swift in Sources */,
 			);
@@ -457,11 +485,13 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mercury/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app will automatically store location data on-device";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app will not automatically store any location data, but you can add it yourself";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -493,11 +523,13 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mercury/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app will automatically store location data on-device";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app will not automatically store any location data, but you can add it yourself";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
