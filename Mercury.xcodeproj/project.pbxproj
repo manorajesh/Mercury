@@ -16,6 +16,8 @@
 		3F5DE7EB2A3938B2006ABE56 /* MercuryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7EA2A3938B2006ABE56 /* MercuryUITestsLaunchTests.swift */; };
 		3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7F92A393EE9006ABE56 /* MapView.swift */; };
 		3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */; };
+		3F5DE7FF2A3A4152006ABE56 /* Mercury.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7FD2A3A4152006ABE56 /* Mercury.xcdatamodeld */; };
+		3F5DE8012A3A41A9006ABE56 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE8002A3A41A9006ABE56 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		3F5DE7EA2A3938B2006ABE56 /* MercuryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercuryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3F5DE7F92A393EE9006ABE56 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
+		3F5DE7FE2A3A4152006ABE56 /* Mercury.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mercury.xcdatamodel; sourceTree = "<group>"; };
+		3F5DE8002A3A41A9006ABE56 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				3F5DE7CC2A3938AE006ABE56 /* MercuryApp.swift */,
-				3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */,
+				3F5DE7FD2A3A4152006ABE56 /* Mercury.xcdatamodeld */,
+				3F5DE8022A3A4649006ABE56 /* Controllers */,
 				3F5DE7F82A393EDB006ABE56 /* Views */,
 				3F5DE7D02A3938B1006ABE56 /* Assets.xcassets */,
 				3F5DE7D52A3938B1006ABE56 /* Mercury.entitlements */,
@@ -141,6 +146,15 @@
 				3F5DE7F92A393EE9006ABE56 /* MapView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3F5DE8022A3A4649006ABE56 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3F5DE8002A3A41A9006ABE56 /* DataController.swift */,
+				3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,8 +288,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F5DE7CF2A3938AE006ABE56 /* ContentView.swift in Sources */,
+				3F5DE8012A3A41A9006ABE56 /* DataController.swift in Sources */,
 				3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */,
 				3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */,
+				3F5DE7FF2A3A4152006ABE56 /* Mercury.xcdatamodeld in Sources */,
 				3F5DE7CD2A3938AE006ABE56 /* MercuryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,6 +626,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3F5DE7FD2A3A4152006ABE56 /* Mercury.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3F5DE7FE2A3A4152006ABE56 /* Mercury.xcdatamodel */,
+			);
+			currentVersion = 3F5DE7FE2A3A4152006ABE56 /* Mercury.xcdatamodel */;
+			path = Mercury.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3F5DE7C12A3938AE006ABE56 /* Project object */;
 }
