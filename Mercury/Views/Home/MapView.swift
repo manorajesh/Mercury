@@ -14,7 +14,7 @@ struct Polyline: Identifiable {
 }
 
 struct MapView: UIViewRepresentable {
-    var polyline: Polyline
+    var coordinates: FetchedResults<Coordinates>
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -27,8 +27,11 @@ struct MapView: UIViewRepresentable {
     }
 
     private func updateOverlays(from mapView: MKMapView) {
+        let polylines = coordinates.map { coordinate in
+            CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        }
         mapView.removeOverlays(mapView.overlays)
-        let overlay = MKPolyline(coordinates: polyline.coordinates, count: polyline.coordinates.count)
+        let overlay = MKPolyline(coordinates: polylines, count: polylines.count)
         mapView.addOverlay(overlay)
     }
 
@@ -57,15 +60,6 @@ struct MapView: UIViewRepresentable {
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(polyline: Polyline(coordinates: [
-            CLLocationCoordinate2D(latitude: 34.024212, longitude: -118.496475), // Santa Monica, CA
-            CLLocationCoordinate2D(latitude: 34.420830, longitude: -119.698189), // Santa Barbara, CA
-            CLLocationCoordinate2D(latitude: 34.274647, longitude: -119.229034), // Ventura, CA
-            CLLocationCoordinate2D(latitude: 35.270378, longitude: -120.680656), // San Luis Obispo, CA
-            CLLocationCoordinate2D(latitude: 35.646328, longitude: -121.190536), // San Simeon, CA
-            CLLocationCoordinate2D(latitude: 35.6852, longitude: -121.1666),     // Hearst Castle, CA
-            CLLocationCoordinate2D(latitude: 36.491508, longitude: -121.197243)  // Pinnacles National Park, CA
-        ]))
-        .ignoresSafeArea(.all)
+        Text("f")
     }
 }

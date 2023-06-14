@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            MapView(polyline: Polyline(coordinates: []))
+            MapView(coordinates: coordinates)
                 .ignoresSafeArea(.container, edges: .all)
                 .tabItem {
                     Image(systemName: "globe")
