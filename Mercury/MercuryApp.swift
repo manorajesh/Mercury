@@ -7,43 +7,51 @@
 
 import SwiftUI
 import BackgroundTasks
+import CoreLocation
 
 @main
 struct MercuryApp: App {
     @StateObject private var dataController = DataController()
+    let locationManager = CLLocationManager()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
-        }
-        .backgroundTask(.appRefresh("LocationRefresh")) {
-            scheduleAppRefresh()
-            let context = await dataController.container.newBackgroundContext()
-            let locationDataManager = LocationDataManager()
-            context.automaticallyMergesChangesFromParent = true
-            
-            context.performAndWait {
-                do {
-                    let location = Coordinates(context: context)
-                    location.id = UUID()
-                    location.timestamp = Date()
-                    location.latitude = (locationDataManager.locationManager.location?.coordinate.latitude)!
-                    location.longitude = (locationDataManager.locationManager.location?.coordinate.longitude)!
-                    print("\(location.latitude), \(location.longitude)")
-                    try context.save()
-                } catch {
-                    print("Error with background task")
-                }
-            }
+                .onAppear(perform: setUp)
         }
     }
-}
+    
+    func setUp() {
+        print("Background task is set up")
+        locationManager.delegate = dataController
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        BGTaskScheduler.shared.register(
+            forTaskWithIdentifier: "com.manorajesh.MercuryApp.updateLocation",
+            using: nil
+        ) { task in
+            self.handleAppRefresh(task: task as! BGAppRefreshTask)
+        }
+        
+        scheduleAppRefresh()
+    }
     
     func scheduleAppRefresh() {
-        let refreshInterval = UserDefaults.standard.integer(forKey: "refreshInterval")
+        let request = BGAppRefreshTaskRequest(identifier: "com.manorajesh.MercuryApp.updateLocation")
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 5 * 60) // Fetch every 2 minutes
         
-        let request = BGAppRefreshTaskRequest(identifier: "LocationRefresh")
-        request.earliestBeginDate = Calendar.current.date(byAdding: .minute, value: 1, to: .now)
-        try? BGTaskScheduler.shared.submit(request)
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            print("Could not schedule app refresh: \(error)")
+        }
     }
+    
+    func handleAppRefresh(task: BGAppRefreshTask) {
+        print("Background task is running")
+        scheduleAppRefresh()
+        dataController.fetchLocation(task: task)
+    }
+}
