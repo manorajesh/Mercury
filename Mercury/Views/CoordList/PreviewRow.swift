@@ -10,22 +10,25 @@ import MapKit
 import CoreLocation
 
 struct PreviewRow: View {
-    var coordinate: CLLocationCoordinate2D
+    var coordinate: Coordinates
     @State private var cityName = "Loading..."
     @State private var stateName = ""
     
     var body: some View {
         HStack {
-            CircleMapPreivew(coordinate: coordinate)
+            CircleMapPreivew(coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
                 .frame(width: 100.0, height: 100.0)
                 .padding()
             
             VStack(alignment: .leading) {
                 Text(cityName)
                     .font(.title)
-                Text(stateName)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+                HStack {
+                    Text(stateName)
+                    Text("\(coordinate.timestamp?.formatted() ?? "")")
+                }
+                .font(.subheadline)
+                .foregroundColor(.gray)
             }
             .onAppear(perform: {
                 let geocoder = CLGeocoder()
@@ -49,6 +52,6 @@ struct PreviewRow: View {
 
 struct PreviewRow_Previews: PreviewProvider {
     static var previews: some View {
-        PreviewRow(coordinate: CLLocationCoordinate2D(latitude: 36, longitude: -106))
+        PreviewRow(coordinate: Coordinates())
     }
 }

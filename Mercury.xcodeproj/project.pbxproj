@@ -21,6 +21,7 @@
 		3F5DE8042A3A4C53006ABE56 /* CircleMapPreivew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE8032A3A4C53006ABE56 /* CircleMapPreivew.swift */; };
 		3F5DE8082A3A4DC1006ABE56 /* PreviewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE8072A3A4DC1006ABE56 /* PreviewRow.swift */; };
 		3F5DE80C2A3A5598006ABE56 /* CoordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE80B2A3A5598006ABE56 /* CoordList.swift */; };
+		3FAE33EC2A3A9A3D009A04F7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE33EB2A3A9A3D009A04F7 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		3F5DE8032A3A4C53006ABE56 /* CircleMapPreivew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMapPreivew.swift; sourceTree = "<group>"; };
 		3F5DE8072A3A4DC1006ABE56 /* PreviewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewRow.swift; sourceTree = "<group>"; };
 		3F5DE80B2A3A5598006ABE56 /* CoordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordList.swift; sourceTree = "<group>"; };
+		3FAE33EB2A3A9A3D009A04F7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 			children = (
 				3F5DE8092A3A4E8F006ABE56 /* CoordList */,
 				3F5DE80A2A3A4E9C006ABE56 /* Home */,
+				3FAE33EB2A3A9A3D009A04F7 /* Settings.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				3F5DE8012A3A41A9006ABE56 /* DataController.swift in Sources */,
 				3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */,
 				3F5DE8042A3A4C53006ABE56 /* CircleMapPreivew.swift in Sources */,
+				3FAE33EC2A3A9A3D009A04F7 /* Settings.swift in Sources */,
 				3F5DE80C2A3A5598006ABE56 /* CoordList.swift in Sources */,
 				3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */,
 				3F5DE8082A3A4DC1006ABE56 /* PreviewRow.swift in Sources */,

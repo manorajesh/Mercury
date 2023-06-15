@@ -16,7 +16,7 @@ struct ContentView: View {
             MapView(coordinates: coordinates)
                 .ignoresSafeArea(.container, edges: .all)
                 .tabItem {
-                    Image(systemName: "globe")
+                    Image(systemName: "globe.americas.fill")
                         .resizable()
                     Text("My Map")
                 }
@@ -32,22 +32,29 @@ struct ContentView: View {
                     }
                 case .authorizedWhenInUse:
                     VStack {
-                        Text("More")
+                        Text("Automatic Location Access is Disabled")
                         ProgressView()
                     }
                 default:
                     VStack {
                         Text("Location Access not Available")
-                        Image(systemName: "cross.circle")
+                        Image(systemName: "x.circle.fill")
                             .foregroundColor(.red)
                     }
                 }
             }
             .tabItem {
-                Image(systemName: "house")
+                Image(systemName: "magazine")
                     .resizable()
                 Text("My Locations")
             }
+            
+            Settings()
+                .tabItem {
+                    Image(systemName: "gear")
+                        .resizable()
+                    Text("Settings")
+                }
         }
         .onAppear {
             let appearance = UITabBarAppearance()

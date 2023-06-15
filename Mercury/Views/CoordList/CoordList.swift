@@ -13,32 +13,53 @@ struct CoordList: View {
     @FetchRequest(sortDescriptors: []) var coordinates: FetchedResults<Coordinates>
     @Environment(\.managedObjectContext) var moc
     
+    @State private var editMode = EditMode.inactive
+    
     var body: some View {
-        VStack {
-            HStack {
-                Button {
-                    let location = Coordinates(context: moc)
-                    location.id = UUID()
-                    location.timestamp = Date()
-                    location.latitude = (locationDataManager.locationManager.location?.coordinate.latitude)!
-                    location.longitude = (locationDataManager.locationManager.location?.coordinate.longitude)!
-                    print("\(location.latitude), \(location.longitude)")
-                    try? moc.save()
-                } label: {
-                    Label("Add Current Location", systemImage: "plus")
+        NavigationView {
+            Group {
+                if coordinates.isEmpty {
+                    VStack {
+                        Text("Get started by adding your current location")
+                            .padding()
+                        Button {
+                            onAdd()
+                        } label: {
+                            Label("Add Current Location", systemImage: "plus")
+                        }
+                    }
+                } else {
+                    List {
+                        ForEach(coordinates) { coordinate in
+                            PreviewRow(coordinate: coordinate)
+                        }
+                        .onDelete(perform: removeLocation)
+                    }
+                    .navigationBarItems(leading: EditButton(), trailing: addButton)
+                    .environment(\.editMode, $editMode)
                 }
-                .padding()
-                Spacer()
             }
-
-            List {
-                ForEach(coordinates) { coordinate in
-                    PreviewRow(coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
-                }
-                .onDelete(perform: removeLocation)
-            }
+            .navigationBarTitle("My Locations")
         }
-        
+    }
+    
+    private var addButton: some View {
+        switch editMode {
+        case .inactive:
+            return AnyView(Button(action: onAdd) { Image(systemName: "plus") })
+        default:
+            return AnyView(EmptyView())
+        }
+    }
+    
+    func onAdd() {
+        let location = Coordinates(context: moc)
+        location.id = UUID()
+        location.timestamp = Date()
+        location.latitude = (locationDataManager.locationManager.location?.coordinate.latitude)!
+        location.longitude = (locationDataManager.locationManager.location?.coordinate.longitude)!
+        print("\(location.latitude), \(location.longitude)")
+        try? moc.save()
     }
     
     func removeLocation(at offsets: IndexSet) {
@@ -47,11 +68,7 @@ struct CoordList: View {
             moc.delete(coordinate)
         }
         
-        do {
-            try moc.save()
-        } catch {
-            print("Unable to save locations")
-        }
+        try? moc.save()
     }
 }
 

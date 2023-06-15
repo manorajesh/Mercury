@@ -17,17 +17,33 @@ struct MercuryApp: App {
             ContentView()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
         }
-        .backgroundTask(.appRefresh("ThirtyMinutesLater")) {
+        .backgroundTask(.appRefresh("LocationRefresh")) {
+            scheduleAppRefresh()
+            let context = await dataController.container.newBackgroundContext()
+            let locationDataManager = LocationDataManager()
+            context.automaticallyMergesChangesFromParent = true
             
+            context.performAndWait {
+                do {
+                    let location = Coordinates(context: context)
+                    location.id = UUID()
+                    location.timestamp = Date()
+                    location.latitude = (locationDataManager.locationManager.location?.coordinate.latitude)!
+                    location.longitude = (locationDataManager.locationManager.location?.coordinate.longitude)!
+                    print("\(location.latitude), \(location.longitude)")
+                    try context.save()
+                } catch {
+                    print("Error with background task")
+                }
+            }
         }
     }
 }
-
-func scheduleAppRefresh() {
-    let now = Date()
-    let later = Calendar.current.date(byAdding: .minute, value: 30, to: now)
     
-    let request = BGAppRefreshTaskRequest(identifier: "ThirtyMinutesLater")
-    request.earliestBeginDate = later
-    try? BGTaskScheduler.shared.submit(request)
-}
+    func scheduleAppRefresh() {
+        let refreshInterval = UserDefaults.standard.integer(forKey: "refreshInterval")
+        
+        let request = BGAppRefreshTaskRequest(identifier: "LocationRefresh")
+        request.earliestBeginDate = Calendar.current.date(byAdding: .minute, value: 1, to: .now)
+        try? BGTaskScheduler.shared.submit(request)
+    }
