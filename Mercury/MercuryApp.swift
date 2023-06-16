@@ -10,7 +10,6 @@ import BackgroundTasks
 
 @main
 struct MercuryApp: App {
-//    @StateObject private var dataController = DataController()
     @Environment(\.scenePhase) var scenePhase
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
@@ -23,7 +22,7 @@ struct MercuryApp: App {
             switch newScenePhase {
             case .background:
                 print("Background")
-                scheduleProcessingRequest()
+                scheduleAppRefreshRequest()
             case .active:
                 print("Active")
             default:
@@ -33,12 +32,10 @@ struct MercuryApp: App {
     }
 }
 
-func scheduleProcessingRequest() {
+func scheduleAppRefreshRequest() {
     print("Scheduling...")
-    let request = BGAppRefreshTaskRequest(identifier: "com.manorajesh.MercuryApp.updateLocationProcessing")
+    let request = BGAppRefreshTaskRequest(identifier: "com.manorajesh.MercuryApp.updateLocation")
     request.earliestBeginDate = .now.addingTimeInterval(30)
-//    request.requiresExternalPower = false
-//    request.requiresNetworkConnectivity = false
     
     do {
         try BGTaskScheduler.shared.submit(request)

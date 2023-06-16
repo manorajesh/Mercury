@@ -43,7 +43,7 @@ struct MapView: UIViewRepresentable {
         mapView.addOverlay(lines)
         
         // dots
-        coordinates.map { coordinate in
+        for coordinate in coordinates {
             let dot = MKPointAnnotation()
             dot.coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
             mapView.addAnnotation(dot)
@@ -72,6 +72,10 @@ struct MapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            if annotation is MKUserLocation {
+                return nil
+            }
+            
             let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
             //Set image
             annotationView.image = UIImage(named: "circle")

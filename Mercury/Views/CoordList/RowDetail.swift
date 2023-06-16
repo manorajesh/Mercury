@@ -21,13 +21,13 @@ struct RowDetail: View {
         @State var lat_long = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         
         VStack {
-            ZStack {
+            ZStack(alignment: .topTrailing) {
                 Map(coordinateRegion: $region,
                     showsUserLocation: true,
                     annotationItems: [coordinate],
                     annotationContent: { location in
                     MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), tint: .red)
-                    }
+                }
                 )
                 .onAppear {
                     setRegion(lat_long, &region)
@@ -41,13 +41,35 @@ struct RowDetail: View {
                     annotationItems: [coordinate],
                     annotationContent: { location in
                     MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), tint: .red)
-                    }
+                }
                 )
                 .onAppear {
                     setRegion(lat_long, &region)
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 5.0))
                 .frame(height: 250.0)
+                
+                VStack {
+                    Spacer()
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 2.0)) {
+                            // Reset the region to your desired location
+                            self.region = MKCoordinateRegion(
+                                center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
+                                span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+                            )
+                        }
+                    }) {
+                        Image(systemName: "location.fill")
+                                            .font(.system(size: 24))
+                                            .foregroundColor(.blue)
+                                            .padding()
+                                            .background(Color.gray)
+                                            .clipShape(Circle())
+                                            .padding(.all, 10)
+                    }
+                    .padding(.bottom)
+                }
             }
             .onAppear(perform: {
                 let geocoder = CLGeocoder()
@@ -79,6 +101,7 @@ struct RowDetail: View {
                         Text("Time")
                     }
                     Section {
+                        //                        Text(everythingName.isEmpty ? "Unknown Address" : everythingName)
                         Text(everythingName)
                     } header: {
                         Text("Address")
@@ -91,6 +114,7 @@ struct RowDetail: View {
                         Text("Internal representation of location entry")
                     }
                 }
+                .textSelection(.enabled)
             }
         }
         .navigationTitle(cityName)

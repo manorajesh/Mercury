@@ -9,8 +9,8 @@ import SwiftUI
 import MapKit
 
 struct CoordList: View {
+    var coordinates: FetchedResults<Coordinates>
     @StateObject var locationDataManager = LocationDataManager()
-    @FetchRequest(sortDescriptors: []) var coordinates: FetchedResults<Coordinates>
     @Environment(\.managedObjectContext) var moc
     
     @State private var editMode = EditMode.inactive
@@ -79,6 +79,7 @@ struct CoordList: View {
 
 struct CoordList_Previews: PreviewProvider {
     static var previews: some View {
-        CoordList()
+//        CoordList(coordinates: FetchedResults<Coordinates>)
+        Text("Unnecessary")
     }
 }

@@ -49,7 +49,7 @@ class DataController: NSObject, ObservableObject, CLLocationManagerDelegate {
             // If location is not available, you can complete the task with success: false
             task.setTaskCompleted(success: false)
         }
-        scheduleProcessingRequest()
+        scheduleAppRefreshRequest()
     }
     
     func saveLocation(_ location: CLLocation) {

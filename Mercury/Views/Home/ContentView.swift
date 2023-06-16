@@ -10,7 +10,7 @@ import MapKit
 
 struct ContentView: View {
     @StateObject var locationDataManager = LocationDataManager()
-    @FetchRequest(sortDescriptors: []) var coordinates: FetchedResults<Coordinates>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp)]) var coordinates: FetchedResults<Coordinates>
     
     var body: some View {
         TabView {
@@ -25,7 +25,7 @@ struct ContentView: View {
             VStack {
                 switch locationDataManager.locationManager.authorizationStatus {
                 case .authorizedAlways:
-                    CoordList()
+                    CoordList(coordinates: coordinates)
                 case .notDetermined:
                     VStack {
                         Text("Waiting for Location Access")

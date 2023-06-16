@@ -14,14 +14,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         print("Registering...")
-        registerProcessingRequest()
+        registerAppRefreshRequest()
         print("Registered")
         return true
     }
     
-    func registerProcessingRequest() {
+    func registerAppRefreshRequest() {
         print("in function")
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.manorajesh.MercuryApp.updateLocationProcessing", using: nil) { task in
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.manorajesh.MercuryApp.updateLocation", using: nil) { task in
             self.dataController.fetchLocation(task: task as! BGAppRefreshTask)
         }
     }
