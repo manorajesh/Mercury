@@ -15,20 +15,13 @@ struct CircleMapPreivew: View {
     var body: some View {
         Map(coordinateRegion: $region)
             .onAppear {
-                setRegion(coordinate)
+                setRegion(coordinate, &region)
             }
             .clipShape(Circle())
             .overlay {
-                Circle().stroke(.gray, lineWidth: 4)
+                Circle().stroke(.gray, lineWidth: 2)
             }
             .shadow(radius: 7)
-    }
-    
-    private func setRegion(_ coordinate: CLLocationCoordinate2D) {
-        region = MKCoordinateRegion(
-            center: coordinate,
-            span: MKCoordinateSpan(latitudeDelta: 3, longitudeDelta: 3)
-        )
     }
 }
 
@@ -36,4 +29,11 @@ struct CircleMapPreivew_Previews: PreviewProvider {
     static var previews: some View {
         CircleMapPreivew(coordinate: CLLocationCoordinate2D(latitude: 23, longitude: 43))
     }
+}
+
+func setRegion(_ coordinate: CLLocationCoordinate2D, _ region: inout MKCoordinateRegion) {
+    region = MKCoordinateRegion(
+        center: coordinate,
+        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    )
 }

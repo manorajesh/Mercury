@@ -31,16 +31,37 @@ class DataController: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func fetchLocation(task: BGAppRefreshTask) {
-        // This is your background task
+        print("In fetchLocation")
+        
+        // Set the expiration handler
+        task.expirationHandler = {
+            // This block will be called when your task is about to be terminated.
+            // You should stop any work you are doing and save state if needed.
+            print("Task expired")
+            task.setTaskCompleted(success: false)
+        }
+        
         // Fetch the location and save it to CoreData
         if let location = locationManager.location {
             saveLocation(location)
+            task.setTaskCompleted(success: true)
+        } else {
+            // If location is not available, you can complete the task with success: false
+            task.setTaskCompleted(success: false)
         }
-        
-        task.setTaskCompleted(success: true)
+        scheduleProcessingRequest()
     }
     
     func saveLocation(_ location: CLLocation) {
-        // Implement this method to save the location into CoreData
+        let moc = container.newBackgroundContext()
+        
+        let coordinate = Coordinates(context: moc)
+        coordinate.id = UUID()
+        coordinate.timestamp = Date()
+        coordinate.latitude = location.coordinate.latitude
+        coordinate.longitude = location.coordinate.longitude
+        
+        try? moc.save()
+        print("Location Saved")
     }
 }

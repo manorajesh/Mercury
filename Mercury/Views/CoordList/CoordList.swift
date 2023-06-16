@@ -31,7 +31,11 @@ struct CoordList: View {
                 } else {
                     List {
                         ForEach(coordinates) { coordinate in
-                            PreviewRow(coordinate: coordinate)
+                            NavigationLink {
+                                RowDetail(coordinate: coordinate)
+                            } label: {
+                                PreviewRow(coordinate: coordinate)
+                            }
                         }
                         .onDelete(perform: removeLocation)
                     }

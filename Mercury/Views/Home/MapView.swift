@@ -19,6 +19,12 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .followWithHeading
+        mapView.isUserInteractionEnabled = true
+        mapView.selectableMapFeatures = .pointsOfInterest
+        mapView.showsCompass = true
+        mapView.showsScale = true
         return mapView
     }
 
@@ -31,8 +37,17 @@ struct MapView: UIViewRepresentable {
             CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         }
         mapView.removeOverlays(mapView.overlays)
-        let overlay = MKPolyline(coordinates: polylines, count: polylines.count)
-        mapView.addOverlay(overlay)
+        
+        // polyline
+        let lines = MKPolyline(coordinates: polylines, count: polylines.count)
+        mapView.addOverlay(lines)
+        
+        // dots
+        coordinates.map { coordinate in
+            let dot = MKPointAnnotation()
+            dot.coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            mapView.addAnnotation(dot)
+        }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -54,6 +69,14 @@ struct MapView: UIViewRepresentable {
                 return renderer
             }
             return MKOverlayRenderer()
+        }
+        
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MyMarker")
+            //Set image
+            annotationView.image = UIImage(named: "circle")
+            
+            return annotationView
         }
     }
 }

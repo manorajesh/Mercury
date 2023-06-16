@@ -5,6 +5,7 @@
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>com.manorajesh.MercuryApp.updateLocation</string>
+		<string>com.manorajesh.MercuryApp.updateLocationProcessing</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

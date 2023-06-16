@@ -17,7 +17,7 @@ struct PreviewRow: View {
     var body: some View {
         HStack {
             CircleMapPreivew(coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
-                .frame(width: 100.0, height: 100.0)
+                .frame(width: 75.0, height: 75.0)
                 .padding()
             
             VStack(alignment: .leading) {
