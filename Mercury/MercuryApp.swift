@@ -43,12 +43,23 @@ func scheduleAppRefreshRequest() {
     var refreshInterval = 30.0    // seconds
     
     print("Scheduling... for \(refreshInterval) seconds")
-    let request = BGAppRefreshTaskRequest(identifier: "com.manorajesh.MercuryApp.updateLocation")
-    request.earliestBeginDate = .now.addingTimeInterval(refreshInterval)
     
-    do {
-        try BGTaskScheduler.shared.submit(request)
-    } catch {
-        print("Unable to submit background process: \(error)")
+    BGTaskScheduler.shared.getPendingTaskRequests { (tasks) in
+        let isTaskPending = tasks.contains(where: { $0.identifier == "com.manorajesh.MercuryApp.updateLocation" })
+        print("\(tasks.debugDescription)")
+        
+        if !isTaskPending {
+            let request = BGAppRefreshTaskRequest(identifier: "com.manorajesh.MercuryApp.updateLocation")
+            request.earliestBeginDate = .now.addingTimeInterval(refreshInterval)
+            
+            do {
+                try BGTaskScheduler.shared.submit(request)
+            } catch {
+                print("Unable to submit background process: \(error)")
+            }
+            print("Scheduled New Task")
+        } else {
+            print("Already scheduled")
+        }
     }
 }

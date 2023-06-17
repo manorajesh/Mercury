@@ -23,6 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func registerAppRefreshRequest() {
         print("in function")
+        BGTaskScheduler.shared.cancelAllTaskRequests()
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "com.manorajesh.MercuryApp.updateLocation", using: nil) { task in
             self.dataController.fetchLocation(task: task as! BGAppRefreshTask)
         }
