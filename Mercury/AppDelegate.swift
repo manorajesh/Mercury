@@ -8,9 +8,11 @@
 import Foundation
 import UIKit
 import BackgroundTasks
+import MapKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     let dataController = DataController()
+    var locationManager = CLLocationManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         print("Registering...")

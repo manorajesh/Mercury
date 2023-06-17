@@ -12,17 +12,39 @@ struct Settings: View {
     @Environment(\.managedObjectContext) var moc
     
     @State private var isPresentingConfirm: Bool = false
+    @State private var isPresentingWelcome: Bool = false
     
     @AppStorage("refreshInterval")
-    var refreshInterval = 10 // minutes
+    var refreshInterval = 30.0    // seconds
+    
+    @AppStorage("appRefreshes")
+    var appRefreshes = 0        // default
+    
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Background Refresh Interval")) {
-                    Stepper(value: $refreshInterval, in: 0...1000, step: 1) {
-                        Text("\(refreshInterval) minutes")
+                Section(header: SettingsHelp(title: "Background Refresh Interval", alertTitle: "About Background Refreshes", alertText: "Please note that the interval is a suggestion to the system. The system may adjust the timing based on factors like network conditions and battery level."), footer: Text("More frequent refreshes will make your travel log more accurate while consuming more battery life.")) {
+                    Stepper(value: $refreshInterval, in: 30...1000, step: 5) {
+                        Text("\(String(format: "%.0f", refreshInterval)) seconds")
+                    }
+                    HStack {
+                        Text("Background Refreshes")
+                        Spacer()
+                        Text("\(appRefreshes)")
+                            .foregroundColor(.gray)
                     }
                 }
+                
+                Section {
+                    Button("Show Welcome") {
+                        isPresentingWelcome.toggle()
+                    }
+                    .sheet(isPresented: $isPresentingWelcome) {
+                        WelcomeSheet()
+                    }
+                }
+                
+                
                 Section {
                     Button("Delete All \(coordinates.count) Locations", role: .destructive) {
                         isPresentingConfirm = true

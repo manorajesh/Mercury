@@ -13,10 +13,16 @@ struct MercuryApp: App {
     @Environment(\.scenePhase) var scenePhase
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    @AppStorage("isNewUser")
+    var isNewUser = true
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, appDelegate.dataController.container.viewContext)
+                .sheet(isPresented: $isNewUser) {
+                    WelcomeSheet()
+                }
         }
         .onChange(of: scenePhase) { (newScenePhase) in
             switch newScenePhase {
@@ -33,9 +39,12 @@ struct MercuryApp: App {
 }
 
 func scheduleAppRefreshRequest() {
-    print("Scheduling...")
+    @AppStorage("refreshInterval")
+    var refreshInterval = 30.0    // seconds
+    
+    print("Scheduling... for \(refreshInterval) seconds")
     let request = BGAppRefreshTaskRequest(identifier: "com.manorajesh.MercuryApp.updateLocation")
-    request.earliestBeginDate = .now.addingTimeInterval(30)
+    request.earliestBeginDate = .now.addingTimeInterval(refreshInterval)
     
     do {
         try BGTaskScheduler.shared.submit(request)

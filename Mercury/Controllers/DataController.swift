@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 import MapKit
 import BackgroundTasks
+import SwiftUI
 
 class DataController: NSObject, ObservableObject, CLLocationManagerDelegate {
     let container = NSPersistentContainer(name: "Mercury")
@@ -31,6 +32,9 @@ class DataController: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func fetchLocation(task: BGAppRefreshTask) {
+        @AppStorage("appRefreshes")
+        var appRefreshes = 0 // default
+        
         print("In fetchLocation")
         
         // Set the expiration handler
@@ -49,6 +53,8 @@ class DataController: NSObject, ObservableObject, CLLocationManagerDelegate {
             // If location is not available, you can complete the task with success: false
             task.setTaskCompleted(success: false)
         }
+        
+        appRefreshes += 1
         scheduleAppRefreshRequest()
     }
     

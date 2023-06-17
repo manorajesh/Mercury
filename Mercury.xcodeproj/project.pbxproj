@@ -24,6 +24,8 @@
 		3FAE33EC2A3A9A3D009A04F7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE33EB2A3A9A3D009A04F7 /* Settings.swift */; };
 		3FAE33EE2A3B8C3F009A04F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE33ED2A3B8C3F009A04F7 /* AppDelegate.swift */; };
 		3FAE33F02A3BFB99009A04F7 /* RowDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE33EF2A3BFB99009A04F7 /* RowDetail.swift */; };
+		3FAE33F42A3D3349009A04F7 /* SettingsHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE33F32A3D3349009A04F7 /* SettingsHelp.swift */; };
+		3FAE33F72A3D4464009A04F7 /* WelcomeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE33F62A3D4464009A04F7 /* WelcomeSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		3FAE33EB2A3A9A3D009A04F7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3FAE33ED2A3B8C3F009A04F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FAE33EF2A3BFB99009A04F7 /* RowDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowDetail.swift; sourceTree = "<group>"; };
+		3FAE33F32A3D3349009A04F7 /* SettingsHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelp.swift; sourceTree = "<group>"; };
+		3FAE33F62A3D4464009A04F7 /* WelcomeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				3F5DE7CC2A3938AE006ABE56 /* MercuryApp.swift */,
+				3FAE33F62A3D4464009A04F7 /* WelcomeSheet.swift */,
 				3FAE33ED2A3B8C3F009A04F7 /* AppDelegate.swift */,
 				3F5DE7FD2A3A4152006ABE56 /* Mercury.xcdatamodeld */,
 				3F5DE8022A3A4649006ABE56 /* Controllers */,
@@ -157,7 +162,7 @@
 			children = (
 				3F5DE8092A3A4E8F006ABE56 /* CoordList */,
 				3F5DE80A2A3A4E9C006ABE56 /* Home */,
-				3FAE33EB2A3A9A3D009A04F7 /* Settings.swift */,
+				3FAE33F52A3D3C39009A04F7 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,6 +194,15 @@
 				3F5DE7F92A393EE9006ABE56 /* MapView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		3FAE33F52A3D3C39009A04F7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3FAE33EB2A3A9A3D009A04F7 /* Settings.swift */,
+				3FAE33F32A3D3349009A04F7 /* SettingsHelp.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,10 +337,12 @@
 			files = (
 				3FAE33EE2A3B8C3F009A04F7 /* AppDelegate.swift in Sources */,
 				3F5DE7CF2A3938AE006ABE56 /* ContentView.swift in Sources */,
+				3FAE33F72A3D4464009A04F7 /* WelcomeSheet.swift in Sources */,
 				3F5DE8012A3A41A9006ABE56 /* DataController.swift in Sources */,
 				3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */,
 				3F5DE8042A3A4C53006ABE56 /* CircleMapPreivew.swift in Sources */,
 				3FAE33F02A3BFB99009A04F7 /* RowDetail.swift in Sources */,
+				3FAE33F42A3D3349009A04F7 /* SettingsHelp.swift in Sources */,
 				3FAE33EC2A3A9A3D009A04F7 /* Settings.swift in Sources */,
 				3F5DE80C2A3A5598006ABE56 /* CoordList.swift in Sources */,
 				3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */,
