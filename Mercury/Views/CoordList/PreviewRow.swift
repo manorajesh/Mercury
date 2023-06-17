@@ -15,10 +15,8 @@ struct PreviewRow: View {
     @State private var stateName = ""
     
     var body: some View {
-        HStack {
-            CircleMapPreivew(coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
-                .frame(width: 75.0, height: 75.0)
-                .padding()
+        ZStack(alignment: .leading) {
+            StaticMapPreview(coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
             
             VStack(alignment: .leading) {
                 Text(cityName)
@@ -52,6 +50,7 @@ struct PreviewRow: View {
 
 struct PreviewRow_Previews: PreviewProvider {
     static var previews: some View {
-        PreviewRow(coordinate: Coordinates())
+        let testCoord = Coordinates()
+        PreviewRow(coordinate: testCoord)
     }
 }

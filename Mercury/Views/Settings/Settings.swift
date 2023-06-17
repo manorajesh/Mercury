@@ -20,10 +20,17 @@ struct Settings: View {
     @AppStorage("appRefreshes")
     var appRefreshes = 0        // default
     
+    @AppStorage("noAppRefresh")
+    var noAppRefresh = false       // default
+    
+    @AppStorage("useLA")
+    var useLA = false
+    
     var body: some View {
         NavigationView {
             Form {
                 Section(header: SettingsHelp(title: "Background Refresh Interval", alertTitle: "About Background Refreshes", alertText: "Please note that the interval is a suggestion to the system. The system may adjust the timing based on factors like network conditions and battery level."), footer: Text("More frequent refreshes will make your travel log more accurate while consuming more battery life.")) {
+                    Toggle("Disable Refreshes", isOn: $noAppRefresh)
                     Stepper(value: $refreshInterval, in: 30...1000, step: 5) {
                         Text("\(String(format: "%.0f", refreshInterval)) seconds")
                     }
@@ -33,6 +40,11 @@ struct Settings: View {
                         Text("\(appRefreshes)")
                             .foregroundColor(.gray)
                     }
+                }
+                .foregroundColor(noAppRefresh ? .gray : .none)
+                
+                Section {
+                    Toggle("Lock with FaceID and Passcode", isOn: $useLA)
                 }
                 
                 Section {

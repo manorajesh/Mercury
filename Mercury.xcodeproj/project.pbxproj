@@ -18,7 +18,7 @@
 		3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */; };
 		3F5DE7FF2A3A4152006ABE56 /* Mercury.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7FD2A3A4152006ABE56 /* Mercury.xcdatamodeld */; };
 		3F5DE8012A3A41A9006ABE56 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE8002A3A41A9006ABE56 /* DataController.swift */; };
-		3F5DE8042A3A4C53006ABE56 /* CircleMapPreivew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE8032A3A4C53006ABE56 /* CircleMapPreivew.swift */; };
+		3F5DE8042A3A4C53006ABE56 /* StaticMapPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE8032A3A4C53006ABE56 /* StaticMapPreview.swift */; };
 		3F5DE8082A3A4DC1006ABE56 /* PreviewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE8072A3A4DC1006ABE56 /* PreviewRow.swift */; };
 		3F5DE80C2A3A5598006ABE56 /* CoordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE80B2A3A5598006ABE56 /* CoordList.swift */; };
 		3FAE33EC2A3A9A3D009A04F7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE33EB2A3A9A3D009A04F7 /* Settings.swift */; };
@@ -61,7 +61,7 @@
 		3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		3F5DE7FE2A3A4152006ABE56 /* Mercury.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mercury.xcdatamodel; sourceTree = "<group>"; };
 		3F5DE8002A3A41A9006ABE56 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		3F5DE8032A3A4C53006ABE56 /* CircleMapPreivew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMapPreivew.swift; sourceTree = "<group>"; };
+		3F5DE8032A3A4C53006ABE56 /* StaticMapPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticMapPreview.swift; sourceTree = "<group>"; };
 		3F5DE8072A3A4DC1006ABE56 /* PreviewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewRow.swift; sourceTree = "<group>"; };
 		3F5DE80B2A3A5598006ABE56 /* CoordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordList.swift; sourceTree = "<group>"; };
 		3FAE33EB2A3A9A3D009A04F7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 		3F5DE8092A3A4E8F006ABE56 /* CoordList */ = {
 			isa = PBXGroup;
 			children = (
-				3F5DE8032A3A4C53006ABE56 /* CircleMapPreivew.swift */,
+				3F5DE8032A3A4C53006ABE56 /* StaticMapPreview.swift */,
 				3F5DE8072A3A4DC1006ABE56 /* PreviewRow.swift */,
 				3F5DE80B2A3A5598006ABE56 /* CoordList.swift */,
 				3FAE33EF2A3BFB99009A04F7 /* RowDetail.swift */,
@@ -340,7 +340,7 @@
 				3FAE33F72A3D4464009A04F7 /* WelcomeSheet.swift in Sources */,
 				3F5DE8012A3A41A9006ABE56 /* DataController.swift in Sources */,
 				3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */,
-				3F5DE8042A3A4C53006ABE56 /* CircleMapPreivew.swift in Sources */,
+				3F5DE8042A3A4C53006ABE56 /* StaticMapPreview.swift in Sources */,
 				3FAE33F02A3BFB99009A04F7 /* RowDetail.swift in Sources */,
 				3FAE33F42A3D3349009A04F7 /* SettingsHelp.swift in Sources */,
 				3FAE33EC2A3A9A3D009A04F7 /* Settings.swift in Sources */,
@@ -515,6 +515,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mercury/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Your biometrics will be used to lock the app, protecting your locations";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app will automatically store location data on-device";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app will not automatically store any location data, but you can add it yourself";
@@ -553,6 +554,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mercury/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Your biometrics will be used to lock the app, protecting your locations";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "The app will automatically store location data on-device";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app will not automatically store any location data, but you can add it yourself";

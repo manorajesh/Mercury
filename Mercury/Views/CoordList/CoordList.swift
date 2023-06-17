@@ -29,18 +29,18 @@ struct CoordList: View {
                         }
                     }
                 } else {
-                    List {
-                        ForEach(coordinates) { coordinate in
-                            NavigationLink {
-                                RowDetail(coordinate: coordinate)
-                            } label: {
-                                PreviewRow(coordinate: coordinate)
+                        List {
+                            ForEach(coordinates) { coordinate in
+                                NavigationLink {
+                                    RowDetail(coordinate: coordinate)
+                                } label: {
+                                    PreviewRow(coordinate: coordinate)
+                                }
                             }
+                            .onDelete(perform: removeLocation)
                         }
-                        .onDelete(perform: removeLocation)
-                    }
-                    .navigationBarItems(leading: EditButton(), trailing: addButton)
-                    .environment(\.editMode, $editMode)
+                        .navigationBarItems(leading: EditButton(), trailing: addButton)
+                        .environment(\.editMode, $editMode)
                 }
             }
             .navigationBarTitle("My Locations")
@@ -79,7 +79,7 @@ struct CoordList: View {
 
 struct CoordList_Previews: PreviewProvider {
     static var previews: some View {
-//        CoordList(coordinates: FetchedResults<Coordinates>)
+        //        CoordList(coordinates: FetchedResults<Coordinates>)
         Text("Unnecessary")
     }
 }
