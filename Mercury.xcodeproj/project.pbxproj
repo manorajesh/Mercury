@@ -514,6 +514,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mercury/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Breadcrumbs;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Your biometrics will be used to lock the app, protecting your locations";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -553,6 +554,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mercury/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Breadcrumbs;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Your biometrics will be used to lock the app, protecting your locations";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

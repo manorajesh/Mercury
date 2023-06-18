@@ -44,7 +44,7 @@ struct Settings: View {
                 .foregroundColor(noAppRefresh ? .gray : .none)
                 
                 Section {
-                    Toggle("Lock with FaceID and Passcode", isOn: $useLA)
+                    Toggle("Lock with Face ID and Passcode", isOn: $useLA)
                 }
                 
                 Section {
