@@ -56,8 +56,9 @@ struct Settings: View {
                     }
                 }
                 
-                
-                Section {
+                Section(header: Text("Data Management")) {
+                    ShareLink("Export Locations", item: DataController().exportData(coordinates) ?? URL(string: "https://www.google.com")!)
+                    
                     Button("Delete All \(coordinates.count) Locations", role: .destructive) {
                         isPresentingConfirm = true
                     }

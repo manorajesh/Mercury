@@ -70,4 +70,44 @@ class DataController: NSObject, ObservableObject, CLLocationManagerDelegate {
         try? moc.save()
         print("Location Saved")
     }
+    
+    func exportData(_ coordinates: FetchedResults<Coordinates>) -> URL? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        let exportData: [[String: Any]] = coordinates.map { coordinate in
+            [
+                "id": coordinate.id?.uuidString ?? UUID().uuidString,
+                "timestamp": dateFormatter.string(from: coordinate.timestamp ?? Date()),
+                "latitude": coordinate.latitude,
+                "longitude": coordinate.longitude
+            ]
+        }
+
+        guard let exportDataJSON = try? JSONSerialization.data(withJSONObject: exportData, options: []) else {
+            return nil
+        }
+
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("export.json")
+        try? exportDataJSON.write(to: url)
+        return url
+    }
+    
+    func importData(from url: URL) {
+        guard let importDataJSON = try? Data(contentsOf: url),
+              let importData = try? JSONSerialization.jsonObject(with: importDataJSON, options: []) as? [[String: Any]] else {
+            return
+        }
+
+        let moc = container.newBackgroundContext()
+        importData.forEach { coordinateData in
+            let coordinate = Coordinates(context: moc)
+            coordinate.id = coordinateData["id"] as? UUID ?? UUID()
+            coordinate.timestamp = coordinateData["timestamp"] as? Date ?? Date()
+            coordinate.latitude = coordinateData["latitude"] as? Double ?? 0.0
+            coordinate.longitude = coordinateData["longitude"] as? Double ?? 0.0
+        }
+
+        try? moc.save()
+    }
+
 }
