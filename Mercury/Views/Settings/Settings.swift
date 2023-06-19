@@ -62,15 +62,6 @@ struct Settings: View {
                     }
                 }
                 
-                Section {
-                    Button("Good") {
-                        isSuccess.toggle()
-                    }
-                    Button("bad") {
-                        isError.toggle()
-                    }
-                }
-                
                 Section(header: Text("Data Management")) {
                     ShareLink("Export Crumbs", item: handleExport())
                     
@@ -98,7 +89,7 @@ struct Settings: View {
                     Button(role: .destructive) {
                         isPresentingConfirm = true
                     } label: {
-                        Label("Delete All \(coordinates.count) Crumbs",  systemImage: "trash")
+                        Label("Delete ^[\(coordinates.count) Crumb](inflect: true)",  systemImage: "trash")
                             .foregroundColor(.red)
                     }
                     .tint(.red)
@@ -134,7 +125,6 @@ struct Settings: View {
     func handleExport() -> URL {
         do {
             let url = try exportData(coordinates)
-            isSuccess.toggle()
             return url!
         } catch {
             isError.toggle()
@@ -144,7 +134,7 @@ struct Settings: View {
     
     func handleImport() {
         do {
-            try importData(from: fileURL!, moc: moc)
+            try importData(from: fileURL, moc: moc)
             isSuccess.toggle()
         } catch {
             isError.toggle()

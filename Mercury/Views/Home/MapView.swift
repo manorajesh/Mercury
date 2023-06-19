@@ -89,7 +89,8 @@ struct MapView: UIViewRepresentable {
             if let polyline = overlay as? MKPolyline {
                 let renderer = MKPolylineRenderer(polyline: polyline)
                 renderer.strokeColor = .systemBlue
-                renderer.lineWidth = 3
+                renderer.lineWidth = 1
+                renderer.lineDashPattern = [0, 5]
                 return renderer
             }
             return MKOverlayRenderer()

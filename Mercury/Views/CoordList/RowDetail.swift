@@ -60,14 +60,15 @@ struct RowDetail: View {
                     }) {
                         Image(systemName: "location.fill")
                             .font(.system(size: 16))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.blue)
                             .padding(.all, 5)
                     }
                     .padding(.bottom)
                     .padding(.all, 10)
-                    .controlSize(.regular)
+                    .controlSize(.small)
                     .foregroundColor(.secondary)
                     .buttonBorderShape(.roundedRectangle(radius: 5.0))
+                    .buttonStyle(.bordered)
                 }
                 .onAppear(perform: {
                     let geocoder = CLGeocoder()
@@ -100,13 +101,31 @@ struct RowDetail: View {
                             Text("Time")
                         }
                         Section {
-                            //                        Text(everythingName.isEmpty ? "Unknown Address" : everythingName)
-                            Text(everythingName)
+                            everythingName != "" ? Text(everythingName) : Text("Unavailable").foregroundColor(.gray)
                         } header: {
                             Text("Address")
                         }
                         Section {
+                            Text("\(String(format: "%.2f", coordinate.altitude)) m")
+                        } header: {
+                            Text("Altitude")
+                        }
+                        Section {
+                            coordinate.course > 0 ? Text("\(coordinate.course) m/s") : Text("Unavailable").foregroundColor(.gray)
+                        } header: {
+                            Text("Course")
+                        }
+                        Section {
+                            coordinate.speed > 0 ? Text("\(coordinate.speed) m/s") : Text("Unavailable").foregroundColor(.gray)
+                        } header: {
+                            Text("Speed")
+                        }
+                        Section {
                             Text("\(coordinate.id?.uuidString ?? "Unknown")")
+                                .font(.system(.body, design: .monospaced))
+                                .foregroundColor(.gray)
+                            
+                            Text(coordinate.manualAdd ? "Manually Added" : "Added in Background")
                                 .font(.system(.body, design: .monospaced))
                                 .foregroundColor(.gray)
                         } header: {
@@ -157,14 +176,15 @@ struct RowDetail: View {
                     }) {
                         Image(systemName: "location.fill")
                             .font(.system(size: 16))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.blue)
                             .padding(.all, 5)
                     }
                     .padding(.bottom)
                     .padding(.all, 10)
-                    .controlSize(.regular)
+                    .controlSize(.small)
                     .foregroundColor(.secondary)
                     .buttonBorderShape(.roundedRectangle(radius: 5.0))
+                    .buttonStyle(.bordered)
                 }
                 .onAppear(perform: {
                     let geocoder = CLGeocoder()
@@ -197,10 +217,24 @@ struct RowDetail: View {
                             Text("Time")
                         }
                         Section {
-                            //                        Text(everythingName.isEmpty ? "Unknown Address" : everythingName)
-                            Text(everythingName)
+                            everythingName != "" ? Text(everythingName) : Text("Unavailable").foregroundColor(.gray)
                         } header: {
                             Text("Address")
+                        }
+                        Section {
+                            Text("\(String(format: "%.2f", coordinate.altitude)) m")
+                        } header: {
+                            Text("Altitude")
+                        }
+                        Section {
+                            coordinate.course > 0 ? Text("\(coordinate.course) m/s") : Text("Unavailable").foregroundColor(.gray)
+                        } header: {
+                            Text("Course")
+                        }
+                        Section {
+                            coordinate.speed > 0 ? Text("\(coordinate.speed) m/s") : Text("Unavailable").foregroundColor(.gray)
+                        } header: {
+                            Text("Speed")
                         }
                         Section {
                             Text("\(coordinate.id?.uuidString ?? "Unknown")")

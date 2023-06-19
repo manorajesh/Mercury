@@ -10,6 +10,8 @@ import MapKit
 import CoreLocation
 
 struct PreviewRow: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     var coordinate: Coordinates
     @State private var cityName = "Loading..."
     @State private var stateName = ""
@@ -17,6 +19,8 @@ struct PreviewRow: View {
     var body: some View {
         ZStack(alignment: .leading) {
             StaticMapPreview(coordinate: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
+                .clipped()
+                .blur(radius: colorScheme == .dark ? 15.0 : 10.0)
             
             VStack(alignment: .leading) {
                 Text(cityName)
@@ -50,7 +54,6 @@ struct PreviewRow: View {
 
 struct PreviewRow_Previews: PreviewProvider {
     static var previews: some View {
-        let testCoord = Coordinates()
-        PreviewRow(coordinate: testCoord)
+        PreviewRow(coordinate: Coordinates())
     }
 }

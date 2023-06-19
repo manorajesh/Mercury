@@ -15,6 +15,9 @@ struct CoordList: View {
     
     @State private var editMode = EditMode.inactive
     
+    @State private var isSuccess = false
+    @State private var isError = false
+    
     var body: some View {
         NavigationView {
             Group {
@@ -44,6 +47,12 @@ struct CoordList: View {
                 }
             }
             .navigationBarTitle("My Crumbs")
+            .toast(isPresenting: $isError) {
+                AlertToast(displayMode: .hud, type: .error(.red), title: "An error occured")
+            }
+            .toast(isPresenting: $isSuccess) {
+                AlertToast(displayMode: .hud, type: .complete(.green), title: "Done!")
+            }
         }
     }
     
@@ -60,10 +69,19 @@ struct CoordList: View {
         let location = Coordinates(context: moc)
         location.id = UUID()
         location.timestamp = Date()
-        location.latitude = (locationDataManager.locationManager.location?.coordinate.latitude)!
-        location.longitude = (locationDataManager.locationManager.location?.coordinate.longitude)!
+        location.latitude = locationDataManager.locationManager.location!.coordinate.latitude
+        location.longitude = locationDataManager.locationManager.location!.coordinate.longitude
+        location.altitude = locationDataManager.locationManager.location!.altitude
+        location.course = locationDataManager.locationManager.location!.course
+        location.speed = locationDataManager.locationManager.location!.speed
+        location.manualAdd = true
         print("\(location.latitude), \(location.longitude)")
-        try? moc.save()
+        do {
+            try moc.save()
+            isSuccess.toggle()
+        } catch {
+            isError.toggle()
+        }
     }
     
     func removeLocation(at offsets: IndexSet) {
@@ -72,14 +90,18 @@ struct CoordList: View {
             moc.delete(coordinate)
         }
         
-        try? moc.save()
+        do {
+            try moc.save()
+            isSuccess.toggle()
+        } catch {
+            isError.toggle()
+        }
     }
 }
 
 
 struct CoordList_Previews: PreviewProvider {
     static var previews: some View {
-        //        CoordList(coordinates: FetchedResults<Coordinates>)
         Text("Unnecessary")
     }
 }

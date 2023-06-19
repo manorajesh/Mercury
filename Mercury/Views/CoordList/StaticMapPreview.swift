@@ -13,16 +13,34 @@ struct StaticMapPreview: View {
     @State private var image: UIImage? = nil
     
     var body: some View {
-        Group {
+        VStack {
             if let image = image {
-                Image(uiImage: image)
+                Color.clear
+                    .overlay (
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    )
             } else {
-                EmptyView()
+                ProgressView()
             }
         }
         .onAppear {
-            getSnapshot(coordinate) { newIMG in
-                image = newIMG
+            let options: MKMapSnapshotter.Options = .init()
+            options.region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            options.size = CGSize(width: 400.0, height: 200.0)
+            options.showsBuildings = true
+            options.mapType = .standard
+            
+            let snapshotter = MKMapSnapshotter(options: options)
+            snapshotter.start { snapshot, error in
+                if let snapshot = snapshot {
+                    withAnimation(.spring()) {
+                        image = snapshot.image
+                    }
+                } else if let error = error {
+                    print("Something went wrong \(error.localizedDescription)")
+                }
             }
         }
     }
@@ -39,20 +57,4 @@ func setRegion(_ coordinate: CLLocationCoordinate2D, _ region: inout MKCoordinat
         center: coordinate,
         span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     )
-}
-
-func getSnapshot(_ coordinate: CLLocationCoordinate2D, completion: @escaping (UIImage?) -> Void) {
-    let options: MKMapSnapshotter.Options = .init()
-    options.region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0))
-    options.size = CGSize(width: 400.0, height: 200.0)
-    options.showsBuildings = true
-    options.mapType = .standard
-    
-    let snapshotter = MKMapSnapshotter(options: options)
-    snapshotter.start { snapshot, error in
-        if let error = error {
-            print("Snapshot error: \(error)")
-        }
-        completion(snapshot?.image)
-    }
 }

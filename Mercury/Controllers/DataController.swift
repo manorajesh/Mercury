@@ -66,47 +66,59 @@ class DataController: NSObject, ObservableObject, CLLocationManagerDelegate {
         coordinate.timestamp = Date()
         coordinate.latitude = location.coordinate.latitude
         coordinate.longitude = location.coordinate.longitude
+        coordinate.altitude = location.altitude
+        coordinate.course = location.course
+        coordinate.speed = location.speed
+        coordinate.manualAdd = false
         
         try? moc.save()
         print("Location Saved")
     }
 }
 
-func importData(from url: URL, moc: NSManagedObjectContext) throws {
-    guard url.startAccessingSecurityScopedResource() else {
-        fatalError("Failed to access resource")
-    }
-    
-    defer {
-        url.stopAccessingSecurityScopedResource()
-    }
-
-    do {
-        let importDataJSON = try Data(contentsOf: url)
-        let importData = try JSONSerialization.jsonObject(with: importDataJSON, options: []) as? [[String: Any]]
+func importData(from url: URL?, moc: NSManagedObjectContext) throws {
+    if let url = url {
+        guard url.startAccessingSecurityScopedResource() else {
+            fatalError("Failed to access resource")
+        }
         
-        print(importData!.count)
-        print(importData!.debugDescription)
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .full
-        
-        for coordinateData in importData! {
-            let coordinate = Coordinates(context: moc)
-            coordinate.id = UUID(uuidString: coordinateData["id"] as! String) ?? UUID()
-            coordinate.timestamp = dateFormatter.date(from: coordinateData["timestamp"] as! String) ?? Date()
-            coordinate.latitude = coordinateData["latitude"] as? Double ?? 0.0
-            coordinate.longitude = coordinateData["longitude"] as? Double ?? 0.0
+        defer {
+            url.stopAccessingSecurityScopedResource()
         }
         
         do {
-            try moc.save()
+            let importDataJSON = try Data(contentsOf: url)
+            let importData = try JSONSerialization.jsonObject(with: importDataJSON, options: []) as? [[String: Any]]
+            
+            print(importData!.count)
+            print(importData!.debugDescription)
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .full
+            
+            for coordinateData in importData! {
+                let coordinate = Coordinates(context: moc)
+                coordinate.id = UUID(uuidString: coordinateData["id"] as! String) ?? UUID()
+                coordinate.timestamp = dateFormatter.date(from: coordinateData["timestamp"] as! String) ?? Date()
+                coordinate.latitude = coordinateData["latitude"] as? Double ?? 0.0
+                coordinate.longitude = coordinateData["longitude"] as? Double ?? 0.0
+                coordinate.altitude = coordinateData["altitude"] as? Double ?? 0.0
+                coordinate.speed = coordinateData["speed"] as? Double ?? 0.0
+                coordinate.course = coordinateData["course"] as? Double ?? 0.0
+                coordinate.manualAdd = coordinateData["manualAdd"] as? Bool ?? false
+            }
+            
+            do {
+                try moc.save()
+            } catch {
+                fatalError("Unable to save entity")
+            }
+            
         } catch {
-            fatalError("Unable to save entity")
+            fatalError("JSON deserialization failed")
         }
-        
-    } catch {
-        fatalError("JSON deserialization failed")
+    } else {
+        fatalError("URL is invalid: \(url!.absoluteString)")
     }
 }
 
@@ -118,7 +130,11 @@ func exportData(_ coordinates: FetchedResults<Coordinates>) throws -> URL? {
             "id": coordinate.id?.uuidString ?? UUID().uuidString,
             "timestamp": dateFormatter.string(from: coordinate.timestamp ?? Date()),
             "latitude": coordinate.latitude,
-            "longitude": coordinate.longitude
+            "longitude": coordinate.longitude,
+            "altitude": coordinate.altitude,
+            "course": coordinate.course,
+            "speed": coordinate.speed,
+            "manualAdd": coordinate.manualAdd
         ]
     }
     
