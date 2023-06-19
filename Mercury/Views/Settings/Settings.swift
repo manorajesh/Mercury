@@ -11,8 +11,15 @@ struct Settings: View {
     @FetchRequest(sortDescriptors: []) var coordinates: FetchedResults<Coordinates>
     @Environment(\.managedObjectContext) var moc
     
+    @State var fileImportURL = URL(string: "www.google.com")
+    
     @State private var isPresentingConfirm: Bool = false
     @State private var isPresentingWelcome: Bool = false
+    @State private var isImporting: Bool = false
+    @State private var isImportingConfirm: Bool = false
+    
+    @State private var showDocumentPicker = false
+    @State private var fileURL: URL?
     
     @AppStorage("refreshInterval")
     var refreshInterval = 30.0    // seconds
@@ -57,10 +64,34 @@ struct Settings: View {
                 }
                 
                 Section(header: Text("Data Management")) {
-                    ShareLink("Export Locations", item: DataController().exportData(coordinates) ?? URL(string: "https://www.google.com")!)
+                    ShareLink("Export Locations", item: exportData(coordinates) ?? URL(string: "https://www.google.com")!)
                     
-                    Button("Delete All \(coordinates.count) Locations", role: .destructive) {
+                    Button {
+                        isImporting = true
+                    } label: {
+                        Label("Import Locations",  systemImage: "square.and.arrow.down")
+                    }
+                    .sheet(isPresented: $isImporting) {
+                        DocumentPicker(fileURL: $fileURL)
+                            .ignoresSafeArea(.container)
+                    }
+                    .onChange(of: fileURL) { newURL in
+                        isImportingConfirm = true
+                    }
+                    .confirmationDialog("Are you sure?", isPresented: $isImportingConfirm) {
+                        Button("Append all Locations?", role: .destructive) {
+                            importData(from: fileURL!, moc: moc)
+                            print("Selected file URL: \(fileURL!)")
+                        }
+                    } message: {
+                        Text("You cannot undo this action")
+                    }
+                    
+                    Button(role: .destructive) {
                         isPresentingConfirm = true
+                    } label: {
+                        Label("Delete All \(coordinates.count) Locations",  systemImage: "trash")
+                            .foregroundColor(.red)
                     }
                     .tint(.red)
                     .confirmationDialog("Are you sure?",

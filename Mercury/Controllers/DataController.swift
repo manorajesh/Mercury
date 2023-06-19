@@ -70,44 +70,70 @@ class DataController: NSObject, ObservableObject, CLLocationManagerDelegate {
         try? moc.save()
         print("Location Saved")
     }
-    
-    func exportData(_ coordinates: FetchedResults<Coordinates>) -> URL? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .full
-        let exportData: [[String: Any]] = coordinates.map { coordinate in
-            [
-                "id": coordinate.id?.uuidString ?? UUID().uuidString,
-                "timestamp": dateFormatter.string(from: coordinate.timestamp ?? Date()),
-                "latitude": coordinate.latitude,
-                "longitude": coordinate.longitude
-            ]
-        }
+}
 
-        guard let exportDataJSON = try? JSONSerialization.data(withJSONObject: exportData, options: []) else {
-            return nil
-        }
-
-        let url = FileManager.default.temporaryDirectory.appendingPathComponent("export.json")
-        try? exportDataJSON.write(to: url)
-        return url
-    }
-    
-    func importData(from url: URL) {
-        guard let importDataJSON = try? Data(contentsOf: url),
-              let importData = try? JSONSerialization.jsonObject(with: importDataJSON, options: []) as? [[String: Any]] else {
+func importData(from url: URL, moc: NSManagedObjectContext) {
+    guard url.startAccessingSecurityScopedResource() else {
+            // If the resource cannot be accessed, you should inform the user and return.
+            print("Failed to access resource.")
             return
         }
-
-        let moc = container.newBackgroundContext()
-        importData.forEach { coordinateData in
+        
+        defer {
+            url.stopAccessingSecurityScopedResource()
+        }
+    
+    //        guard let importDataJSON = try? Data(contentsOf: url),
+    //              let importData = try? JSONSerialization.jsonObject(with: importDataJSON, options: []) as? [[String: Any]] else {
+    //            return
+    //        }
+    
+    do {
+        let importDataJSON = try Data(contentsOf: url)
+        let importData = try JSONSerialization.jsonObject(with: importDataJSON, options: []) as? [[String: Any]]
+        
+        print(importData!.count)
+        print(importData!.debugDescription)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        
+        for coordinateData in importData! {
             let coordinate = Coordinates(context: moc)
-            coordinate.id = coordinateData["id"] as? UUID ?? UUID()
-            coordinate.timestamp = coordinateData["timestamp"] as? Date ?? Date()
+            coordinate.id = UUID(uuidString: coordinateData["id"] as! String) ?? UUID()
+            coordinate.timestamp = dateFormatter.date(from: coordinateData["timestamp"] as! String) ?? Date()
             coordinate.latitude = coordinateData["latitude"] as? Double ?? 0.0
             coordinate.longitude = coordinateData["longitude"] as? Double ?? 0.0
         }
-
-        try? moc.save()
+        
+        do {
+            try moc.save()
+        } catch {
+            print(error)
+        }
+        
+    } catch {
+        print(error.localizedDescription)
     }
+}
 
+func exportData(_ coordinates: FetchedResults<Coordinates>) -> URL? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .full
+    let exportData: [[String: Any]] = coordinates.map { coordinate in
+        [
+            "id": coordinate.id?.uuidString ?? UUID().uuidString,
+            "timestamp": dateFormatter.string(from: coordinate.timestamp ?? Date()),
+            "latitude": coordinate.latitude,
+            "longitude": coordinate.longitude
+        ]
+    }
+    
+    guard let exportDataJSON = try? JSONSerialization.data(withJSONObject: exportData, options: []) else {
+        return nil
+    }
+    
+    let url = FileManager.default.temporaryDirectory.appendingPathComponent("export.json")
+    try? exportDataJSON.write(to: url)
+    return url
 }

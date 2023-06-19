@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F22A0AF2A3FF1E100665CDE /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F22A0AE2A3FF1E100665CDE /* DocumentPicker.swift */; };
 		3F5DE7CD2A3938AE006ABE56 /* MercuryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7CC2A3938AE006ABE56 /* MercuryApp.swift */; };
 		3F5DE7CF2A3938AE006ABE56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7CE2A3938AE006ABE56 /* ContentView.swift */; };
 		3F5DE7D12A3938B1006ABE56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F5DE7D02A3938B1006ABE56 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F22A0AE2A3FF1E100665CDE /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		3F5DE7C92A3938AE006ABE56 /* Mercury.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mercury.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F5DE7CC2A3938AE006ABE56 /* MercuryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercuryApp.swift; sourceTree = "<group>"; };
 		3F5DE7CE2A3938AE006ABE56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				3F5DE8002A3A41A9006ABE56 /* DataController.swift */,
+				3F22A0AE2A3FF1E100665CDE /* DocumentPicker.swift */,
 				3F5DE7FB2A3A35F2006ABE56 /* LocationDataManager.swift */,
 			);
 			path = Controllers;
@@ -348,6 +351,7 @@
 				3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */,
 				3F5DE8082A3A4DC1006ABE56 /* PreviewRow.swift in Sources */,
 				3F5DE7FF2A3A4152006ABE56 /* Mercury.xcdatamodeld in Sources */,
+				3F22A0AF2A3FF1E100665CDE /* DocumentPicker.swift in Sources */,
 				3F5DE7CD2A3938AE006ABE56 /* MercuryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
