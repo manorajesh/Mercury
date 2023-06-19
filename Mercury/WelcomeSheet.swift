@@ -14,9 +14,9 @@ struct WelcomeSheet: View {
         NavigationView {
             VStack(alignment: .leading) {
                 Divider().padding([.top, .trailing, .leading])
-                Text("Getting started with \(Bundle.main.infoDictionary!["CFBundleName"] as! String) is as easy as closing the app! However, to automatically record your location, the app will always need it.")
+                Text("Getting started with Breadcrumbs is as easy as closing the app! The app will automatically take snapshots of your location (aka your breadcrumbs). However, to automatically record your location, the app will always need it.")
                     .padding()
-                Text("Note: your location data will NEVER leave your device")
+                Text("Note: your location data will NEVER leave your device.")
                     .bold()
                     .padding(.leading)
                 
@@ -50,7 +50,7 @@ struct WelcomeSheet: View {
                     HStack(alignment: .top) {
                         Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
                             .clipShape(Circle())
-                        Text("Select ") + Text("Mercury").bold()
+                        Text("Select ") + Text("Breadcrumbs").bold()
                     }.padding(7)
                     
                     HStack(alignment: .top) {

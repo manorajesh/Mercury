@@ -72,22 +72,15 @@ class DataController: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 }
 
-func importData(from url: URL, moc: NSManagedObjectContext) {
+func importData(from url: URL, moc: NSManagedObjectContext) throws {
     guard url.startAccessingSecurityScopedResource() else {
-            // If the resource cannot be accessed, you should inform the user and return.
-            print("Failed to access resource.")
-            return
-        }
-        
-        defer {
-            url.stopAccessingSecurityScopedResource()
-        }
+        fatalError("Failed to access resource")
+    }
     
-    //        guard let importDataJSON = try? Data(contentsOf: url),
-    //              let importData = try? JSONSerialization.jsonObject(with: importDataJSON, options: []) as? [[String: Any]] else {
-    //            return
-    //        }
-    
+    defer {
+        url.stopAccessingSecurityScopedResource()
+    }
+
     do {
         let importDataJSON = try Data(contentsOf: url)
         let importData = try JSONSerialization.jsonObject(with: importDataJSON, options: []) as? [[String: Any]]
@@ -109,15 +102,15 @@ func importData(from url: URL, moc: NSManagedObjectContext) {
         do {
             try moc.save()
         } catch {
-            print(error)
+            fatalError("Unable to save entity")
         }
         
     } catch {
-        print(error.localizedDescription)
+        fatalError("JSON deserialization failed")
     }
 }
 
-func exportData(_ coordinates: FetchedResults<Coordinates>) -> URL? {
+func exportData(_ coordinates: FetchedResults<Coordinates>) throws -> URL? {
     let dateFormatter = DateFormatter()
     dateFormatter.dateStyle = .full
     let exportData: [[String: Any]] = coordinates.map { coordinate in
@@ -129,11 +122,14 @@ func exportData(_ coordinates: FetchedResults<Coordinates>) -> URL? {
         ]
     }
     
-    guard let exportDataJSON = try? JSONSerialization.data(withJSONObject: exportData, options: []) else {
-        return nil
+    do {
+        let exportDataJSON = try JSONSerialization.data(withJSONObject: exportData, options: [])
+        
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("export.json")
+        try exportDataJSON.write(to: url)
+        return url
+        
+    } catch {
+        fatalError("JSON serialization failed")
     }
-    
-    let url = FileManager.default.temporaryDirectory.appendingPathComponent("export.json")
-    try? exportDataJSON.write(to: url)
-    return url
 }

@@ -43,7 +43,7 @@ struct CoordList: View {
                         .environment(\.editMode, $editMode)
                 }
             }
-            .navigationBarTitle("My Locations")
+            .navigationBarTitle("My Crumbs")
         }
     }
     

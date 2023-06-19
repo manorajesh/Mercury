@@ -21,8 +21,8 @@ struct StaticMapPreview: View {
             }
         }
         .onAppear {
-            getSnapshot(coordinate) { img in
-                self.image = img
+            getSnapshot(coordinate) { newIMG in
+                image = newIMG
             }
         }
     }

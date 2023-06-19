@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3F22A0AF2A3FF1E100665CDE /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F22A0AE2A3FF1E100665CDE /* DocumentPicker.swift */; };
+		3F22A0B42A40327700665CDE /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F22A0B12A40327700665CDE /* BlurView.swift */; };
+		3F22A0B52A40327700665CDE /* AlertToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F22A0B22A40327700665CDE /* AlertToast.swift */; };
+		3F22A0B62A40327700665CDE /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F22A0B32A40327700665CDE /* ActivityIndicator.swift */; };
 		3F5DE7CD2A3938AE006ABE56 /* MercuryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7CC2A3938AE006ABE56 /* MercuryApp.swift */; };
 		3F5DE7CF2A3938AE006ABE56 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5DE7CE2A3938AE006ABE56 /* ContentView.swift */; };
 		3F5DE7D12A3938B1006ABE56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F5DE7D02A3938B1006ABE56 /* Assets.xcassets */; };
@@ -48,6 +51,9 @@
 
 /* Begin PBXFileReference section */
 		3F22A0AE2A3FF1E100665CDE /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
+		3F22A0B12A40327700665CDE /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		3F22A0B22A40327700665CDE /* AlertToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertToast.swift; sourceTree = "<group>"; };
+		3F22A0B32A40327700665CDE /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		3F5DE7C92A3938AE006ABE56 /* Mercury.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mercury.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F5DE7CC2A3938AE006ABE56 /* MercuryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercuryApp.swift; sourceTree = "<group>"; };
 		3F5DE7CE2A3938AE006ABE56 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +104,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F22A0B02A40327700665CDE /* AlertToast */ = {
+			isa = PBXGroup;
+			children = (
+				3F22A0B12A40327700665CDE /* BlurView.swift */,
+				3F22A0B22A40327700665CDE /* AlertToast.swift */,
+				3F22A0B32A40327700665CDE /* ActivityIndicator.swift */,
+			);
+			path = AlertToast;
+			sourceTree = "<group>";
+		};
 		3F5DE7C02A3938AE006ABE56 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +137,7 @@
 		3F5DE7CB2A3938AE006ABE56 /* Mercury */ = {
 			isa = PBXGroup;
 			children = (
+				3F22A0B02A40327700665CDE /* AlertToast */,
 				3F5DE7CC2A3938AE006ABE56 /* MercuryApp.swift */,
 				3FAE33F62A3D4464009A04F7 /* WelcomeSheet.swift */,
 				3FAE33ED2A3B8C3F009A04F7 /* AppDelegate.swift */,
@@ -343,15 +360,18 @@
 				3FAE33F72A3D4464009A04F7 /* WelcomeSheet.swift in Sources */,
 				3F5DE8012A3A41A9006ABE56 /* DataController.swift in Sources */,
 				3F5DE7FA2A393EE9006ABE56 /* MapView.swift in Sources */,
+				3F22A0B52A40327700665CDE /* AlertToast.swift in Sources */,
 				3F5DE8042A3A4C53006ABE56 /* StaticMapPreview.swift in Sources */,
 				3FAE33F02A3BFB99009A04F7 /* RowDetail.swift in Sources */,
 				3FAE33F42A3D3349009A04F7 /* SettingsHelp.swift in Sources */,
 				3FAE33EC2A3A9A3D009A04F7 /* Settings.swift in Sources */,
+				3F22A0B42A40327700665CDE /* BlurView.swift in Sources */,
 				3F5DE80C2A3A5598006ABE56 /* CoordList.swift in Sources */,
 				3F5DE7FC2A3A35F2006ABE56 /* LocationDataManager.swift in Sources */,
 				3F5DE8082A3A4DC1006ABE56 /* PreviewRow.swift in Sources */,
 				3F5DE7FF2A3A4152006ABE56 /* Mercury.xcdatamodeld in Sources */,
 				3F22A0AF2A3FF1E100665CDE /* DocumentPicker.swift in Sources */,
+				3F22A0B62A40327700665CDE /* ActivityIndicator.swift in Sources */,
 				3F5DE7CD2A3938AE006ABE56 /* MercuryApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

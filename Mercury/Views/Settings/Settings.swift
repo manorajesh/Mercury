@@ -21,6 +21,9 @@ struct Settings: View {
     @State private var showDocumentPicker = false
     @State private var fileURL: URL?
     
+    @State private var isSuccess = false
+    @State private var isError = false
+    
     @AppStorage("refreshInterval")
     var refreshInterval = 30.0    // seconds
     
@@ -41,12 +44,8 @@ struct Settings: View {
                     Stepper(value: $refreshInterval, in: 30...1000, step: 5) {
                         Text("\(String(format: "%.0f", refreshInterval)) seconds")
                     }
-                    HStack {
-                        Text("Background Refreshes")
-                        Spacer()
-                        Text("\(appRefreshes)")
-                            .foregroundColor(.gray)
-                    }
+                    Text("Background Refreshes")
+                        .badge(appRefreshes)
                 }
                 .foregroundColor(noAppRefresh ? .gray : .none)
                 
@@ -63,13 +62,22 @@ struct Settings: View {
                     }
                 }
                 
+                Section {
+                    Button("Good") {
+                        isSuccess.toggle()
+                    }
+                    Button("bad") {
+                        isError.toggle()
+                    }
+                }
+                
                 Section(header: Text("Data Management")) {
-                    ShareLink("Export Locations", item: exportData(coordinates) ?? URL(string: "https://www.google.com")!)
+                    ShareLink("Export Crumbs", item: handleExport())
                     
                     Button {
                         isImporting = true
                     } label: {
-                        Label("Import Locations",  systemImage: "square.and.arrow.down")
+                        Label("Import Crumbs",  systemImage: "square.and.arrow.down")
                     }
                     .sheet(isPresented: $isImporting) {
                         DocumentPicker(fileURL: $fileURL)
@@ -79,8 +87,8 @@ struct Settings: View {
                         isImportingConfirm = true
                     }
                     .confirmationDialog("Are you sure?", isPresented: $isImportingConfirm) {
-                        Button("Append all Locations?", role: .destructive) {
-                            importData(from: fileURL!, moc: moc)
+                        Button("Append all Crumbs?", role: .destructive) {
+                            handleImport()
                             print("Selected file URL: \(fileURL!)")
                         }
                     } message: {
@@ -90,7 +98,7 @@ struct Settings: View {
                     Button(role: .destructive) {
                         isPresentingConfirm = true
                     } label: {
-                        Label("Delete All \(coordinates.count) Locations",  systemImage: "trash")
+                        Label("Delete All \(coordinates.count) Crumbs",  systemImage: "trash")
                             .foregroundColor(.red)
                     }
                     .tint(.red)
@@ -101,7 +109,12 @@ struct Settings: View {
                                 moc.delete(coordinate)
                             }
                             
-                            try? moc.save()
+                            do {
+                                try moc.save()
+                                isSuccess.toggle()
+                            } catch {
+                                isError.toggle()
+                            }
                         }
                     } message: {
                         Text("You cannot undo this action")
@@ -109,6 +122,32 @@ struct Settings: View {
                 }
             }
             .navigationBarTitle(Text("Settings"))
+        }
+        .toast(isPresenting: $isError) {
+            AlertToast(displayMode: .hud, type: .error(.red), title: "An error occured")
+        }
+        .toast(isPresenting: $isSuccess) {
+            AlertToast(displayMode: .hud, type: .complete(.green), title: "Success!")
+        }
+    }
+    
+    func handleExport() -> URL {
+        do {
+            let url = try exportData(coordinates)
+            isSuccess.toggle()
+            return url!
+        } catch {
+            isError.toggle()
+            return URL(string: "www.google.com")!
+        }
+    }
+    
+    func handleImport() {
+        do {
+            try importData(from: fileURL!, moc: moc)
+            isSuccess.toggle()
+        } catch {
+            isError.toggle()
         }
     }
 }

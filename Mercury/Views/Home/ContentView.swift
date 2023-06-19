@@ -11,6 +11,7 @@ import LocalAuthentication
 
 struct ContentView: View {
     @StateObject var locationDataManager = LocationDataManager()
+    @State private var mapView = MKMapView()
     @FetchRequest(sortDescriptors: [SortDescriptor(\.timestamp, order: .reverse)]) var coordinates: FetchedResults<Coordinates>
 
     @State private var isUnlocked = false // defaults to unlocked
@@ -22,12 +23,28 @@ struct ContentView: View {
         Group {
             if !useLA || isUnlocked {
                 TabView {
-                    MapView(coordinates: coordinates)
-                        .ignoresSafeArea(.container, edges: .all)
-                        .tabItem {
-                            Image(systemName: "globe.americas.fill")
-                                .resizable()
-                            Text("My Map")
+                    ZStack(alignment: .topTrailing) {
+                        MapView(mapView: $mapView, coordinates: coordinates)
+                            .ignoresSafeArea(.container, edges: .all)
+                        VStack {
+                            UserTrackingButton(mapView: $mapView)
+                                .frame(width: 40.0, height: 40.0)
+                            CompassButton(mapView: $mapView)
+                                .frame(width: 40.0, height: 40.0)
+                        }
+                        .padding()
+                    }
+                    .tabItem {
+                        Image(systemName: "globe.americas.fill")
+                            .resizable()
+                        Text("Map")
+                    }
+                    .overlay(alignment: .top) {
+                            Color.clear // Or any view or color
+                                .background(.ultraThinMaterial)
+                                .ignoresSafeArea(edges: .top)
+                                .frame(height: 0) // This will constrain the overlay to only go above the top safe area and not under.
+                                .blur(radius: 10.0)
                         }
                     
                     VStack {
@@ -55,7 +72,7 @@ struct ContentView: View {
                     .tabItem {
                         Image(systemName: "magazine")
                             .resizable()
-                        Text("My Locations")
+                        Text("Crumbs")
                     }
                     
                     Settings()
@@ -79,7 +96,6 @@ struct ContentView: View {
                         authenticate()
                     } label: {
                         Image(systemName: "lock.fill")
-                            .frame(width: 100.0)
                             .foregroundColor(.red)
                             .padding()
                     }

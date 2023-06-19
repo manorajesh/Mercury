@@ -13,17 +13,41 @@ struct Polyline: Identifiable {
     let coordinates: [CLLocationCoordinate2D]
 }
 
+struct UserTrackingButton: UIViewRepresentable {
+    @Binding var mapView: MKMapView
+
+    func makeUIView(context: Context) -> MKUserTrackingButton {
+        let button = MKUserTrackingButton(mapView: mapView)
+        button.backgroundColor = .white.withAlphaComponent(0.8)
+        button.layer.cornerRadius = 5
+        return button
+    }
+
+    func updateUIView(_ uiView: MKUserTrackingButton, context: Context) {}
+}
+
+struct CompassButton: UIViewRepresentable {
+    @Binding var mapView: MKMapView
+
+    func makeUIView(context: Context) -> MKCompassButton {
+        let compass = MKCompassButton(mapView: mapView)
+        return compass
+    }
+
+    func updateUIView(_ uiView: MKCompassButton, context: Context) {}
+}
+
 struct MapView: UIViewRepresentable {
+    @Binding var mapView: MKMapView
     var coordinates: FetchedResults<Coordinates>
     
     func makeUIView(context: Context) -> MKMapView {
-        let mapView = MKMapView()
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .followWithHeading
         mapView.isUserInteractionEnabled = true
         mapView.selectableMapFeatures = .pointsOfInterest
-        mapView.showsCompass = true
+        mapView.showsCompass = false
         mapView.showsScale = true
         return mapView
     }
