@@ -64,6 +64,7 @@ struct WelcomeSheet: View {
             .navigationTitle("Welcome! 👋")
         }
         .padding()
+        .presentationDragIndicator(.visible)
     }
 }
 
